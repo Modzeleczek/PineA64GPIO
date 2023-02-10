@@ -1,5 +1,6 @@
+#include "gpio.h"
+
 #include <stdio.h>
-#include <stdint.h>
 #include <stdlib.h>
 #include <fcntl.h>
 #include <sys/mman.h>
@@ -15,15 +16,6 @@
 przekazujemy adres 0x01C20000 do mmap, bo musimy zachować wyrównanie (alignment) adresów,
 tzn. adres przekazywany do mmap musi być podzielny (modulo) przez PAGE_SIZE */
 #define GPIO_REGISTERS_BASE_ADDRESS 0x01C20000
-
-typedef struct
-{
-  int dev_mem_fd;
-  uint8_t *unaligned_mem;
-  /* Allwinner A64 (według https://linux-sunxi.org/Allwinner_SoC_Family, seria A, rodzina sun50i)
-  ma 32-bitowe rejestry PIO, stąd 4-bajtowy typ */
-  uint8_t *map;
-} gpio_context_t;
 
 int gpio_init(gpio_context_t *ctx)
 {
@@ -96,27 +88,10 @@ typedef struct
   uint32_t PUL[2]; // Pn_PUL0-1
 } port_t;
 
-/*
-"gpio" zawiera indeks portu i 1-bitowej linii wejścia/wyjścia (io) w porcie
-indeks portu    port    liczba io
-0               B       10
-1               C       17
-2               D       25
-3               E       18
-4               F       7
-5               G       14
-6               H       12
-np. 011 00110 - port 3 (E); io 6
-*/
 #define GPIO_PORT(gpio) ((gpio) >> 5)
 #define PORT_OFFSET(map, port_id) ((port_t*)((uint8_t*)map + 0x800 + 0x24 + port_id * sizeof(port_t)))
 #define GPIO_IO(gpio) ((gpio) & 0b00011111)
 
-/*
-"pull_up_down" może mieć poniższe wartości
-00: Pull-up/down disable  01: Pull-up
-10: Pull-down             11: Reserved
-*/
 void gpio_set_pull_up_down(gpio_context_t *ctx, uint8_t gpio, uint8_t pull_up_down)
 {
   int port_id = GPIO_PORT(gpio); // gpio >> 5
@@ -150,13 +125,6 @@ uint8_t gpio_get_pull_up_down(gpio_context_t *ctx, uint8_t gpio)
   return (uint8_t)reg_val;
 }
 
-/*
-"function" może mieć poniższe wartości (na przykładzie PC13 ze strony 381; inne GPIO mogą mieć inne funkcje specjalne, tutaj NAND_DQ5, SDC2_D5)
-000: Input     001: Output
-010: NAND_DQ5  011: SDC2_D5
-100: Reserved  101: Reserved
-110: Reserved  111: IO Disable
-*/
 void gpio_set_function(gpio_context_t *ctx, uint8_t gpio, uint8_t function)
 {
   int port_id = GPIO_PORT(gpio); // gpio >> 5
@@ -194,9 +162,6 @@ uint8_t gpio_get_function(gpio_context_t *ctx, uint8_t gpio)
   return (uint8_t)reg_val;
 }
 
-/*
-"value" może mieć wartość 0 lub 1
-*/
 void gpio_set_value(gpio_context_t *ctx, uint8_t gpio, uint8_t value)
 {
   int port_id = GPIO_PORT(gpio); // gpio >> 5
