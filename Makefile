@@ -1,6 +1,7 @@
 CC = gcc
 CFLAGS = -Wall -Wextra
 BUILD = ./build
+EXAMPLES = ./examples
 
 all: libgpio libsegdisp
 
@@ -17,6 +18,18 @@ $(BUILD)/libsegdisp.a: $(BUILD)/gpio.o $(BUILD)/segdisp.o
 $(BUILD)/segdisp.o: segdisp.c segdisp.h
 	@mkdir -p $(BUILD)
 	gcc $(word 1, $^) -c -o $@
+
+button: $(BUILD)/libgpio.a $(BUILD)/button.o
+	gcc $(word 2,$^) -L$(BUILD) -l:$(notdir $(word 1,$^)) -o $(BUILD)/$@
+$(BUILD)/button.o: $(EXAMPLES)/button.c
+	@mkdir -p $(BUILD)
+	gcc $^ -c -o $@
+
+display: $(BUILD)/libsegdisp.a $(BUILD)/display.o
+	gcc $(word 2,$^) -L$(BUILD) -l:$(notdir $(word 1,$^)) -o $(BUILD)/$@
+$(BUILD)/display.o: $(EXAMPLES)/display.c
+	@mkdir -p $(BUILD)
+	gcc $^ -c -o $@
 
 clean:
 	@rm -rvf $(BUILD)
