@@ -8,7 +8,7 @@
 
 /* Information about GPIO registers available in Allwinner A64 microprocessor
 (hereinafter referred to as A64) was taken from chapter
-3.21. Port Controller(CPUx-PORT) beginning at page 376 of
+3.21. Port Controller(CPUx-PORT) beginning on page 376 of
 (https://linux-sunxi.org/images/b/b4/Allwinner_A64_User_Manual_V1.1.pdf
 accessed 11.02.2023) */
 

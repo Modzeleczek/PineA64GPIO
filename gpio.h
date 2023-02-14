@@ -32,14 +32,14 @@ Sets pull-up/down resistor mode of 'gpio'.
 'gpio' contains GPIO port index in 3 more significant bits
 and 1-bit input/output line index in 5 less significant bits.
 port index      port    number of 1-bit input/output lines (manual, p. 376)
-0               B       10
-1               C       17
-2               D       25
-3               E       18
-4               F       7
-5               G       14
-6               H       12
-e.g. 011 00110 - port 3 (E), io 6
+0               PB       10
+1               PC       17
+2               PD       25
+3               PE       18
+4               PF       7
+5               PG       14
+6               PH       12
+e.g. 010 00110 - port 2 (PD), io 6
 
 'pull_up_down' can have the following values (manual, p. 379):
 00: Pull-up/down disable  01: Pull-up

@@ -3,7 +3,7 @@ CFLAGS = -Wall -Wextra
 BUILD = ./build
 EXAMPLES = ./examples
 
-all: libgpio libsegdisp
+all: libgpio libsegdisp button display
 
 libgpio: $(BUILD)/libgpio.a
 $(BUILD)/libgpio.a: $(BUILD)/gpio.o

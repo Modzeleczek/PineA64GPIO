@@ -15,7 +15,7 @@ int main()
 
   const uint8_t button = 0b00101010; // PC10; pin 38
   gpio_set_function(&gpio_ctx, button, 0b000); // input
-  gpio_set_pull_up_down(&gpio_ctx, button, 0b00000001); // pull-up
+  gpio_set_pull_up_down(&gpio_ctx, button, 0b01); // pull-up
 
   const uint8_t led = 0b00101011; // PC11; pin 40
   gpio_set_function(&gpio_ctx, led, 0b001); // output

@@ -133,7 +133,11 @@ void segdisp_display_digit(segdisp_context_t *ctx,
     (enabled_segments[digit_value] << 1) | enable_decimal_point;
   segdisp_shift_out(ctx, segments_with_point);
 
-  // This implementation assumes that only one digit is turned on.
+  /* This implementation assumes that only one digit is turned on because the
+  used 4-digit 8-segment module can display only one digit on multiple positions
+  at once. Therefore, to display an entire number, we keep displaying all
+  of its four digits one after another so fast that we see the digits as if they
+  were displayed simultaneously. */
   uint8_t enabled_digits = ((0b1000 >> position) << 4) | 0b0000;
   segdisp_shift_out(ctx, enabled_digits);
 
