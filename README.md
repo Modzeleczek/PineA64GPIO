@@ -150,7 +150,7 @@ make button
 
 In this example, a button acts as SPST (Single Pole Single Throw) switch. When the button is pressed, it shorts GPIO pin 38 (i/o line PC10) to ground and `gpio_get_value` returns 0. Due to enabled pull-up resistor mode, when the button is released, the i/o line PC10 is charged up to high logic level electric potential and `gpio_get_value` returns 1.
 
-![imgur; button](https://i.imgur.com/85nKu1U.gif)
+[<img src="https://i.imgur.com/QTu5XP3.png" width="500"/>](https://youtu.be/z5VB0dxBXFs)
 
 #### 2. Display
 This example uses SegDisp library dependent on GPIO library. SegDisp library can be used to drive a 4-digit 8-segment LED display module based on two 75HC595 shift registers connected in series (images below).
@@ -187,12 +187,14 @@ make display
 
 This example presents how SegDisp library drives a display module. For details on data format accepted by the module, see `segdisp_display_digit` function definition in `segdisp.c` file.
 
-![imgur; display fast](https://i.imgur.com/MsoL6rF.gif)
+Click the image to watch the presentation on YouTube.
+
+[<img src="https://i.imgur.com/qMRmQco.png" width="500"/>](https://youtu.be/jkWAZQpNkA8)
 
 The counter can be slowed down but refresh rate must be preserved to avoid flickering.
 
-![imgur; display slow](https://i.imgur.com/ghS6oGq.gif)
+[<img src="https://i.imgur.com/HlrkiFj.png" width="500"/>](https://youtu.be/dpd_Jnp3cyA)
 
 `base` parameter value passed to `segdisp_display_number` determines the numeral system in which the counter value is expressed.
 
-![imgur; display hex](https://i.imgur.com/x1QtvlB.gif)
+[<img src="https://i.imgur.com/6gZzmLU.png" width="500"/>](https://youtu.be/im4N6AtdCXk)
