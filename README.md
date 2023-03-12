@@ -152,6 +152,8 @@ In this example, a button acts as SPST (Single Pole Single Throw) switch. When t
 
 [<img src="https://i.imgur.com/QTu5XP3.png" width="500"/>](https://youtu.be/z5VB0dxBXFs)
 
+(Click the image to watch the presentation on YouTube.)
+
 #### 2. Display
 This example uses SegDisp library dependent on GPIO library. SegDisp library can be used to drive a 4-digit 8-segment LED display module based on two 75HC595 shift registers connected in series (images below).
 
@@ -186,8 +188,6 @@ make display
 ```
 
 This example presents how SegDisp library drives a display module. For details on data format accepted by the module, see `segdisp_display_digit` function definition in `segdisp.c` file.
-
-Click the image to watch the presentation on YouTube.
 
 [<img src="https://i.imgur.com/qMRmQco.png" width="500"/>](https://youtu.be/jkWAZQpNkA8)
 
