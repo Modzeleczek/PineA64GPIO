@@ -8,7 +8,7 @@ all: libgpio libsegdisp button display
 libgpio: $(BUILD)/libgpio.a
 $(BUILD)/libgpio.a: $(BUILD)/gpio.o
 	ar rcs $@ $^
-$(BUILD)/gpio.o: gpio.c gpio.h # w gpio.c jest #include "gpio.h"
+$(BUILD)/gpio.o: gpio.c gpio.h # gpio.c contains #include "gpio.h"
 	@mkdir -p $(BUILD)
 	gcc $(word 1, $^) -c -o $@
 
