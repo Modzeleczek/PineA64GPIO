@@ -1,5 +1,5 @@
-#include "../gpio.h"
-#include "../segdisp.h"
+#include "gpio.h"
+#include "segdisp.h"
 
 #include <stdio.h>
 #include <unistd.h>

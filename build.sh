@@ -1,22 +1,25 @@
 #!/bin/bash
 
-dir=build
+BUILD=./build
 
-if [ -d $dir ]; then
-  rm -r $dir
+if [ -d $BUILD ]
+then
+  rm -r $BUILD
 fi
-mkdir $dir
+mkdir -p $BUILD
 
-gcc gpio.c -c -o $dir/gpio.o
-ar rcs $dir/libgpio.a $dir/gpio.o
+SOURCE=./source
+INCLUDE=-I./include
+gcc $SOURCE/gpio.c $INCLUDE -c -o $BUILD/gpio.o
+ar rcs $BUILD/libgpio.a $BUILD/gpio.o
 
-gcc gpio.c -c -o $dir/gpio.o
-gcc segdisp.c -c -o $dir/segdisp.o
-ar rcs $dir/libsegdisp.a $dir/gpio.o $dir/segdisp.o
+gcc $SOURCE/segdisp.c $INCLUDE -c -o $BUILD/segdisp.o
+ar rcs $BUILD/libsegdisp.a $BUILD/gpio.o $BUILD/segdisp.o
 
-ex=examples
-gcc $ex/button.c -c -o $dir/button.o
-gcc $dir/button.o -L$dir -l:libgpio.a -o $dir/button
+EXAMPLES=./examples
+gcc $EXAMPLES/button.c $INCLUDE -c -o $BUILD/button.o
+gcc $EXAMPLES/display.c $INCLUDE -c -o $BUILD/display.o
 
-gcc $ex/display.c -c -o $dir/display.o
-gcc $dir/display.o -L$dir -l:libsegdisp.a -o $dir/display
+LINK=-L$BUILD
+gcc $BUILD/button.o $LINK -l:libgpio.a -o $BUILD/button
+gcc $BUILD/display.o $LINK -l:libsegdisp.a -o $BUILD/display
