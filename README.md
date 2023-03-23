@@ -49,9 +49,15 @@ or
 Either way, compiled static library archive `libgpio.a` is placed in `./build` directory.
 
 To delete `./build`, use:
-```
-make clean
-```
+1.  ```
+    make clean
+    ```
+
+or
+
+2.  ```
+    rm -r ./build
+    ```
 
 ## Usage
 ### Programming
