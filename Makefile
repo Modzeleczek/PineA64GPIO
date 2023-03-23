@@ -11,14 +11,14 @@ $(BUILD)/libgpio.a: $(BUILD)/gpio.o
 # gpio.c contains #include "gpio.h" so gpio.o depends on them both.
 $(BUILD)/gpio.o: gpio.c gpio.h
 	@mkdir -p $(BUILD)
-	gcc $(word 1, $^) -c -o $@
+	gcc $(word 1,$^) -c -o $@
 
 libsegdisp: $(BUILD)/libsegdisp.a
 $(BUILD)/libsegdisp.a: $(BUILD)/gpio.o $(BUILD)/segdisp.o
 	ar rcs $@ $^
 $(BUILD)/segdisp.o: segdisp.c segdisp.h
 	@mkdir -p $(BUILD)
-	gcc $(word 1, $^) -c -o $@
+	gcc $(word 1,$^) -c -o $@
 
 button: $(BUILD)/libgpio.a $(BUILD)/button.o
 	gcc $(word 2,$^) -L$(BUILD) -l:$(notdir $(word 1,$^)) -o $(BUILD)/$@
