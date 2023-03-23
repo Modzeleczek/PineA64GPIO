@@ -32,8 +32,8 @@ According to file 'PINE A64 Pi-2/Eular/Ext Bus/Wifi Bus Connector Pin Assignment
 <img src="https://i.imgur.com/tFX6UHp.png" width="500"/>
 
 ## Building
-GPIO library only uses Linux system calls and C standard library functions without any external dependencies. To build it, firstly clone this repository to a Pine A64/A64+ board running Linux. Make sure you have ```gcc``` (GNU Compiler Collection) and ```ar``` (Archiver) available. Then you have two options:
-1. If ```make``` is available, build the library using the following command:
+GPIO library only uses Linux system calls and C standard library functions without any external dependencies. To build it, firstly clone this repository to a Pine A64/A64+ board running Linux. Make sure you have `gcc` (GNU Compiler Collection) and `ar` (Archiver) available. Then you have two options:
+1. If `make` is available, build the library using the following command:
     ```
     make libgpio
     ```
