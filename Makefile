@@ -1,6 +1,4 @@
 MAKEFLAGS += --no-builtin-rules # Disable implicit rules execution.
-CC = gcc
-CFLAGS = -Wall -Wextra
 BUILD = ./build
 SOURCE = ./source
 INCLUDE = ./include
